@@ -5,27 +5,31 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Attacker : MonoBehaviour
 {
-    
+
+    public float seenEverySeconds;
     private float currentSpeed;
+    private Animator animator;
 
     private GameObject currentTarget;
 
     // Use this for initialization
     void Start()
     {
-        var rigidBody = gameObject.AddComponent<Rigidbody2D>();
-        rigidBody.isKinematic = true;
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.Translate(Vector3.left   * currentSpeed * Time.deltaTime);
+        if (!currentTarget)
+        {
+            animator.SetBool("isAttacking",false);
+        }
     }
 
     void OnTriggerEnter2D()
     {
-        Debug.Log(name + " trigger enter.");
     }
     
     
@@ -36,7 +40,16 @@ public class Attacker : MonoBehaviour
     
     public void StrikeCurrentTarget(float damage)
     {
-    	Debug.Log(name  + " caused damage:" + damage);
+        if (currentTarget == null)
+        {
+            return;
+        }
+        var healthComp = currentTarget.GetComponent<Health>();
+        if (healthComp == null)
+        {
+            return;
+        }
+        healthComp.DealDamage(damage);
     }
 
     public void Attack(GameObject obj)

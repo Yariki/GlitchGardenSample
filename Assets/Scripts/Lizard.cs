@@ -9,7 +9,7 @@ public class Lizard : CoreAttackers
 
         if (gameObject.GetComponent<Defender>() && anim != null && attacker != null)
         {
-            anim.SetBool("IsAttackingTrrigered", true);
+            anim.SetBool("isAttacking", true);
             attacker.Attack(gameObject);
         }
     }
