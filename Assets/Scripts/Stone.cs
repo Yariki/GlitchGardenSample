@@ -1,15 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Stone : MonoBehaviour {
+public class Stone : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    private Animator animator;
+
+
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    void OnTriggerStay2D(Collider2D collider2)
+    {
+        Attacker attacker = collider2.gameObject.GetComponent<Attacker>();
+        if (attacker && animator)
+        {
+            animator.SetTrigger("underAttack");
+        }
+    }
+
+
 }

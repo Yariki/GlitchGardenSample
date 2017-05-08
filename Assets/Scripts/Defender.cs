@@ -3,21 +3,19 @@ using System.Collections;
 
 public class Defender : MonoBehaviour
 {
+    public int spawnCost = 100;
+    private StarsDisplay startDisplay;
 
-    // Use this for initialization
     void Start()
     {
-
+        startDisplay = GameObject.FindObjectOfType<StarsDisplay>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AddStars(int amount)
     {
-
-    }
-
-    void OnTriggerEnter2D()
-    {
-        Debug.Log(name + " trigger enter.");
+        if (startDisplay)
+        {
+            startDisplay.AddStars(amount);
+        }
     }
 }

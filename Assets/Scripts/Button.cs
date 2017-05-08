@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Button : MonoBehaviour
@@ -7,11 +8,18 @@ public class Button : MonoBehaviour
     public GameObject currentPrefab;
     public static GameObject currentSelectredPrefab;
     private Button[] buttons;
+    private Text textCost;
 
     // Use this for initialization
     void Start()
     {
         buttons = GameObject.FindObjectsOfType<Button>();
+
+        textCost = GetComponentInChildren<Text>();
+        if (textCost)
+        {
+            textCost.text = currentPrefab.GetComponent<Defender>().spawnCost.ToString();
+        }
     }
 
     // Update is called once per frame
